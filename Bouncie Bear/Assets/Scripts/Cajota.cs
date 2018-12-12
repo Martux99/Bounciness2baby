@@ -22,7 +22,7 @@ public class Cajota : MonoBehaviour {
         {
             gm.lastCrate = this.transform.position.y;
             player = collision.gameObject.GetComponent<Rigidbody2D>();
-            player.gravityScale = 0;
+            //player.gravityScale = 0;
             player.velocity = new Vector2(0, 0);
             player.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 0.5f);
             if (generatedNext == false)
