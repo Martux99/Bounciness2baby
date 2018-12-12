@@ -14,9 +14,9 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (pos.position.y > kodak.transform.position.y)
+        if (pos.position.y > kodak.transform.position.y+2)
         {
-            kodak.transform.position = new Vector3(0, pos.position.y,-10);
+            kodak.transform.position = new Vector3(0, pos.position.y-2,-10);
         }
 
 	}

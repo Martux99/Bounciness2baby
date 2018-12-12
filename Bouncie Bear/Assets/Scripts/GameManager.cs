@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     GameObject player;
     public float lastCrate;
     public GameObject Crate;
+    bool arreglado = false;
 
 	void Start ()
     {
@@ -22,11 +23,20 @@ public class GameManager : MonoBehaviour {
 	}
     public void generateCrate(float posx,float posy)
     {
-        float randy = Random.Range(-1.5f, 1.6f);
-        while (randy < posx - 0.5f || randy > posx + 0.5f)
+        float randy = Random.Range(-2f, 2f);
+        Debug.Log(randy);
+        Debug.Log(posx);
+        if ((randy > posx - 0.5f && randy<0) || (randy < posx + 0.5f && randy>0))
         {
-            randy = Random.Range(-3, 3.1f);
+            if (randy < 0)
+            {
+                randy = 2f;
+            }
+            else
+                randy = -2f;
+            Debug.Log("Correcion");
         }
-        Instantiate(Crate, new Vector2(randy, posy), transform.rotation);
+        
+        Instantiate(Crate, new Vector2(randy, posy+3.0f), transform.rotation);
     }
 }

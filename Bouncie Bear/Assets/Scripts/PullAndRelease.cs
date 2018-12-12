@@ -8,6 +8,7 @@ public class PullAndRelease : MonoBehaviour
     bool released = true;
     bool dragPermited=false;
     public GameObject moises;
+    public GameObject estela;
 
     void OnMouseDrag()
     {
@@ -28,7 +29,10 @@ public class PullAndRelease : MonoBehaviour
             }
 
             transform.position = startPos + dir;
-            Debug.Log(startPos + dir);
+            /*
+            Instantiate(estela, transform);
+            Vector2 dire = startPos - (Vector2)transform.position;
+            estela.GetComponent<Rigidbody2D>().AddForce(dir * force);*/
         }
         
     }
@@ -37,15 +41,20 @@ public class PullAndRelease : MonoBehaviour
 
     void OnMouseUp()
     {
+        GetComponent<Rigidbody2D>().isKinematic = false;
+        GetComponent<Rigidbody2D>().freezeRotation = false;
         if (dragPermited)
         {
+            /// <summary>uyuyuy</summary>
+            /// mas de nuestras tarugadas por aca
+            /// Quien sabe para que sirva
+
             dragPermited = false;
             released = true;
-            GetComponent<Rigidbody2D>().isKinematic = false;
+            
             GetComponent<Rigidbody2D>().gravityScale = 1.0f;
             Vector2 dir = startPos - (Vector2)transform.position;
             GetComponent<Rigidbody2D>().AddForce(dir * force);
-            this.enabled = false;
         }
         
     }
@@ -56,11 +65,13 @@ public class PullAndRelease : MonoBehaviour
        
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Moises")
         {
-            dragPermited=true;
+            GetComponent<Rigidbody2D>().freezeRotation = true;
+            GetComponent<Rigidbody2D>().isKinematic = true;
+            dragPermited =true;
             moises = collision.gameObject;
         }
     }
