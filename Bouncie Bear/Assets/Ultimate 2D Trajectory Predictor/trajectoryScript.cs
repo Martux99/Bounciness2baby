@@ -121,6 +121,7 @@ public class trajectoryScript : MonoBehaviour {
 			}
 
 			fingerPos = Camera.main.ScreenToWorldPoint (Input.mousePosition); 	//The position of your finger/cursor is found
+            
 			fingerPos.z = 0;													//The z position is set to 0
 
 			if (grabWhileMoving == true) {										//If you've enabled shooting while the ball is moving
@@ -128,9 +129,17 @@ public class trajectoryScript : MonoBehaviour {
 				ballRB.isKinematic = true;										//The "ball" isn't affected by other forces (it stays in the same spot)
 		}
 
-			ballFingerDiff = ballPos - fingerPos;								//The distance between the finger/cursor and the "ball" is found
-			
-			shotForce = new Vector2 (ballFingerDiff.x * shootingPowerX, ballFingerDiff.y * shootingPowerY)/2;	//The velocity of the shot is found
+			ballFingerDiff = ballPos - fingerPos;                               //The distance between the finger/cursor and the "ball" is found
+            if (ballFingerDiff.x > 3)
+            {
+                ballFingerDiff.x = 3;
+            }
+            else if (ballFingerDiff.y > 3)
+            {
+                ballFingerDiff.y = 3;
+            }
+
+            shotForce = new Vector2 (ballFingerDiff.x * shootingPowerX, ballFingerDiff.y * shootingPowerY)/1.5f;	//The velocity of the shot is found
 
 			if ((Mathf.Sqrt ((ballFingerDiff.x * ballFingerDiff.x) + (ballFingerDiff.y * ballFingerDiff.y)) > (0.4f))) { //If the distance between the finger/cursor and the "ball" is big enough...
 				trajectoryDots.SetActive (true);								//Display the trajectory
